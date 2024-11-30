@@ -1,59 +1,72 @@
 <?php
 session_start();
-include 'db/db_connection.php';
 
-
+// Inicializar el carrito si no existe
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    if (!in_array($id, $_SESSION['cart'])) {
-        $_SESSION['cart'][] = $id;
+// Función para agregar productos al carrito
+function addToCart($productId, $quantity) {
+    if (isset($_SESSION['cart'][$productId])) {
+        $_SESSION['cart'][$productId] += $quantity;
+    } else {
+        $_SESSION['cart'][$productId] = $quantity;
     }
 }
 
+// Función para eliminar productos del carrito
+function removeFromCart($productId) {
+    unset($_SESSION['cart'][$productId]);
+}
 
-$cartProducts = [];
-$total = 0; 
-if (!empty($_SESSION['cart'])) {
-    $placeholders = implode(',', array_fill(0, count($_SESSION['cart']), '?'));
-    $stmt = $pdo->prepare("SELECT * FROM products WHERE id IN ($placeholders)");
-    $stmt->execute($_SESSION['cart']);
-    $cartProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    
-    foreach ($cartProducts as $product) {
-        $total += $product['price'];
+// Manejar el envío del formulario
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['add_to_cart'])) {
+        $productId = $_POST['product_id'];
+        $quantity = $_POST['quantity'];
+        addToCart($productId, $quantity);
+    } elseif (isset($_POST['remove_from_cart'])) {
+        $productId = $_POST['product_id'];
+        removeFromCart($productId);
     }
 }
+
+// Mostrar el carrito
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito de Compras</title>
     <link rel="stylesheet" href="styles.css">
+    <title>Carrito de Compras</title>
 </head>
 <body>
-    <h1>Carrito de Compras</h1>
-    <div class="cart-list">
-        <?php if (empty($cartProducts)): ?>
-            <p>Tu carrito está vacío.</p>
-        <?php else: ?>
-            <?php foreach ($cartProducts as $product): ?>
-                <div class="cart-item">
-                    <h2><?php echo htmlspecialchars($product['name']); ?></h2>
-                    <p>Precio: $<?php echo htmlspecialchars($product['price']); ?></p>
-                </div>
-            <?php endforeach; ?>
-            <h3>Total: $<?php echo number_format($total, 2); ?></h3> 
-        <?php endif; ?>
-    </div>
-    <a href="index.php">Volver a la Tienda</a>
-    <a href="checkout.php">Proceder al Pago</a>
+    <header>
+        <h1>Carrito de Compras</h1>
+    </header>
+    <main>
+        <h2>Productos en el Carrito</h2>
+        <ul>
+            <?php if (empty($_SESSION['cart'])): ?>
+                <li>No hay productos en el carrito.</li>
+            <?php else: ?>
+                <?php foreach ($_SESSION['cart'] as $productId => $quantity): ?>
+                    <li>
+                        Producto ID: <?php echo htmlspecialchars($productId); ?> - Cantidad: <?php echo htmlspecialchars($quantity); ?>
+                        <form action="cart.php" method="POST" style="display:inline;">
+                            <input type="hidden" name="product_id" value="<?php echo $productId; ?>">
+                            <button type="submit" name="remove_from_cart">Eliminar</button>
+                        </form>
+                    </li>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </ul>
+        <a href="checkout.php">Proceder al Checkout</a>
+    </main>
+    <footer>
+        <p>&copy; 2024 KakaoTrendy. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>

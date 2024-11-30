@@ -1,15 +1,14 @@
 <?php
+$servername = "localhost";
+$username = "root"; 
+$password = ""; 
+$database = "php_store"; 
 
+// Crear conexión
+$conn = new mysqli($servername, $username, $password, $database);
 
-$host = 'localhost';
-$db = 'php_store'; 
-$user = 'root'; 
-$pass = ''; 
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Error de conexión: " . $e->getMessage());
+// Verificar conexión
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
 }
 ?>

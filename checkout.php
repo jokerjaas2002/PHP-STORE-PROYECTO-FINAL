@@ -1,65 +1,58 @@
 <?php
-session_start();
-include 'db/db_connection.php';
+session_start(); // Iniciar la sesión
+include 'db/db_connection.php'; // Incluir la conexión a la base de datos
 
-
+// Verificar si el carrito está vacío
 if (empty($_SESSION['cart'])) {
-    header("Location: index.php");
-    exit();
+    header('Location: cart.php');
+    exit;
 }
 
-
-$cartProducts = [];
-$total = 0; 
-if (!empty($_SESSION['cart'])) {
-    $placeholders = implode(',', array_fill(0, count($_SESSION['cart']), '?'));
-    $stmt = $pdo->prepare("SELECT * FROM products WHERE id IN ($placeholders)");
-    $stmt->execute($_SESSION['cart']);
-    $cartProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    
-    foreach ($cartProducts as $product) {
-        $total += $product['price'];
-    }
-}
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
-
-    
-    $_SESSION['cart'] = [];
-    header("Location: order_confirmation.php");
-    exit();
+// Calcular el total del carrito
+$total = 0;
+foreach ($_SESSION['cart'] as $item) {
+    $total += $item['price'] * $item['quantity'];
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
     <link rel="stylesheet" href="styles.css">
+    <title>Checkout</title>
 </head>
 <body>
-    <h1>Checkout</h1>
-    <form method="POST" action="">
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="address">Dirección:</label>
-        <input type="text" id="address" name="address" required>
-
-        <label for="payment">Método de Pago:</label>
-        <select id="payment" name="payment" required>
-            <option value="credit_card">Tarjeta de Crédito</option>
-            <option value="paypal">PayPal</option>
-        </select>
-
-        <h3>Total: $<?php echo number_format($total, 2); ?></h3> 
-
-        <button type="submit">Realizar Pedido</button>
-    </form>
-    <a href="cart.php">Volver al Carrito</a>
+    <header>
+        <h1>KakaoTrendy</h1>
+        <nav>
+            <ul>
+                <li><a href="index.php">Inicio</a></li>
+                <li><a href="products.php">Productos</a></li>
+                <li><a href="cart.php">Carrito</a></li>
+                <li><a href="checkout.php">Checkout</a></li>
+                <li><a href="#about">Sobre Nosotros</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="checkout">
+            <h2>Checkout</h2>
+            <form action="process_order.php" method="post">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name"><br><br>
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email"><br><br>
+                <label for="address">Dirección:</label>
+                <input type="text" id="address" name="address"><br><br>
+                <input type="submit" value="Realizar Pedido">
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 KakaoTrendy. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>
