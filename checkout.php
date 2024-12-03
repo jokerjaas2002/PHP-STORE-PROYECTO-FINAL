@@ -1,14 +1,14 @@
 <?php
-session_start(); // Iniciar la sesión
-include 'db/db_connection.php'; // Incluir la conexión a la base de datos
+session_start(); 
+include 'db/db_connection.php'; 
 
-// Verificar si el carrito está vacío
+
 if (empty($_SESSION['cart'])) {
     header('Location: cart.php');
     exit;
 }
 
-// Calcular el total del carrito
+
 $total = 0;
 foreach ($_SESSION['cart'] as $item) {
     $total += $item['price'] * $item['quantity'];

@@ -2,7 +2,6 @@
 session_start(); 
 include 'db/db_connection.php'; 
 
-
 $sql = "SELECT * FROM products"; 
 $result = $conn->query($sql);
 ?>

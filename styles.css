@@ -8,12 +8,12 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f5ebfa;
     color: #333;
 }
 
 header {
-    background: #35424a;
+    background: #653d79;
     color: #ffffff;
     padding: 10px 0;
     text-align: center;
@@ -46,29 +46,29 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
-/* Estilos del contenedor principal */
+
 main {
     padding: 20px;
-    max-width: 1200px; /* Ancho máximo para centrar */
-    margin: 0 auto; /* Centrar el contenedor principal */
+    max-width: 1200px; 
+    margin: 0 auto; 
 }
 
-/* Estilos de la lista de productos */
+
 #product-list {
     margin: 20px 0;
 }
 
-/* Estilos para las secciones de productos */
+
 .product-section {
     background: #ffffff;
     border: 1px solid #dddddd;
     border-radius: 5px;
-    margin: 20px 0; /* Espacio entre secciones */
+    margin: 20px 0; 
     padding: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos del contenedor de productos */
+
 .product-container {
     display: flex;
     flex-wrap: wrap;
@@ -81,7 +81,7 @@ main {
     border-radius: 5px;
     margin: 10px;
     padding: 15px;
-    width: calc(33% - 40px); /* Tres productos por fila */
+    width: calc(33% - 40px); 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
 }
@@ -105,7 +105,7 @@ main {
     margin: 5px 0;
 }
 
-/* Estilos del formulario */
+
 form {
     display: flex;
     align-items: center;
@@ -131,9 +131,9 @@ form button:hover {
     background: #2c3e50;
 }
 
-/* Estilos del pie de página */
+
 footer {
-    background: #35424a;
+    background: #653d79;
     color: #ffffff;
     text-align: center;
     padding: 10px 0;

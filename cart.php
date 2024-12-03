@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-// Inicializar el carrito si no existe
+
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-// Función para agregar productos al carrito
+
 function addToCart($productId, $quantity) {
     if (isset($_SESSION['cart'][$productId])) {
         $_SESSION['cart'][$productId] += $quantity;
@@ -15,12 +15,12 @@ function addToCart($productId, $quantity) {
     }
 }
 
-// Función para eliminar productos del carrito
+
 function removeFromCart($productId) {
     unset($_SESSION['cart'][$productId]);
 }
 
-// Manejar el envío del formulario
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['add_to_cart'])) {
         $productId = $_POST['product_id'];
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Mostrar el carrito
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -40,11 +40,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Carrito de Compras</title>
+    <title>Carrito de Compras - KakaoTrendy</title>
 </head>
 <body>
     <header>
-        <h1>Carrito de Compras</h1>
+        <h1>KakaoTrendy</h1>
+        <nav>
+            <ul>
+                <li><a href="index.php">Inicio</a></li>
+                <li><a href="products.php">Productos</a></li>
+                <li><a href="cart.php">Carrito</a></li>
+                <li><a href="checkout.php">Checkout</a></li>
+                <li><a href="#about">Sobre Nosotros</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
         <h2>Productos en el Carrito</h2>

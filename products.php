@@ -35,7 +35,7 @@ include 'db/db_connection.php';
                 $products = [];
                 
                 if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
+                    while ($row = $result->fetch_assoc()) {
                         $products[] = $row;
                     }
                 }
@@ -46,29 +46,39 @@ include 'db/db_connection.php';
                 for ($i = 0; $i < 10; $i++) {
                     echo "<div class='product-section'>";
                     echo "<h3>Sección " . ($i + 1) . "</h3>";
-                    echo "<div class='product-container'>"; // Contenedor para los productos
+                    echo "<div class='product-container'>";
                     for ($j = 0; $j < $productsPerSection; $j++) {
                         $index = $i * $productsPerSection + $j;
                         if ($index < $totalProducts) {
                             $product = $products[$index];
                             echo "<div class='product'>";
-                            echo "<img src='images/" . htmlspecialchars($product["image"]) . "' alt='" . htmlspecialchars($product["name"]) . "'>";
+                            echo "<img src='" . htmlspecialchars($product["image"]) . "' alt='" . htmlspecialchars($product["name"]) . "'>";
                             echo "<h4>" . htmlspecialchars($product["name"]) . "</h4>";
                             echo "<p>Precio: $" . htmlspecialchars($product["price"]) . "</p>";
+                            echo "<form action='add_to_cart.php' method='POST'>";
+                            echo "<input type='hidden' name='product_id' value='" . htmlspecialchars($product["id"]) . "'>";
+                            echo "<input type='number' name='quantity' value='1' min='1' max='10'>";
+                            echo "<button type='submit'>Agregar al Carrito</button>";
+                            echo "</form>";
                             echo "<a href='product.php?id=" . htmlspecialchars($product["id"]) . "'>Ver Detalles</a>";
-                            echo "<a href='cart.php?id=" . htmlspecialchars($product["id"]) . "'>Agregar al Carrito</a>";
                             echo "</div>";
                         }
                     }
-                    echo "</div>"; // Cierre del contenedor de productos
-                    echo "</div>"; // Cierre de la sección
+                    echo "</div>";
+                    echo "</div>";
                 }
+                
+                echo "<div class='pagination'>";
+                for ($i = 1; $i <= 10; $i++) {
+                    echo "<a href='?page=$i'>" . $i . "</a> ";
+                }
+                echo "</div>";
                 ?>
             </div>
         </section>
+        <footer>
+            <p>&copy; 2024 KakaoTrendy. Todos los derechos reservados.</p>
+        </footer>
     </main>
-    <footer>
-        <p>&copy; 2024 KakaoTrendy. Todos los derechos reservados.</p>
-    </footer>
 </body>
 </html>

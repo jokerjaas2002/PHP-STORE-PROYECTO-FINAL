@@ -1,16 +1,16 @@
 <?php
-session_start(); // Iniciar la sesión
-include 'db/db_connection.php'; // Incluir la conexión a la base de datos
+session_start(); 
+include 'db/db_connection.php'; 
 
-// Verificar si se ha pasado un ID de orden
+
 if (!isset($_GET['order_id'])) {
-    header('Location: index.php'); // Redirigir si no hay ID de orden
+    header('Location: index.php'); 
     exit;
 }
 
 $order_id = intval($_GET['order_id']);
 
-// Obtener detalles de la orden
+
 $sql = "SELECT * FROM orders WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $order_id);
@@ -23,7 +23,7 @@ if (!$order) {
     exit;
 }
 
-// Obtener los productos de la orden
+
 $sql_items = "SELECT * FROM order_items WHERE order_id = ?";
 $stmt_items = $conn->prepare($sql_items);
 $stmt_items->bind_param("i", $order_id);
