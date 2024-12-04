@@ -43,9 +43,24 @@ include 'db/db_connection.php';
                 $totalProducts = count($products);
                 $productsPerSection = ceil($totalProducts / 10);
                 
+                
+                $sectionNames = [
+                    "Vestidos",
+                    "Pantalones y Jeans",
+                    "Bragas",
+                    "Trajes de Baños",
+                    "Chaquetas y Suéteres",
+                    "Shorts y Faldas",
+                    "Blusas y Tops",
+                    "Accesorios",
+                    "Pijamas y Lencería",
+                    "Ropa Deportiva"
+                ];
+                
                 for ($i = 0; $i < 10; $i++) {
                     echo "<div class='product-section'>";
-                    echo "<h3>Sección " . ($i + 1) . "</h3>";
+                    
+                    echo "<h3>" . $sectionNames[$i] . "</h3>";
                     echo "<div class='product-container'>";
                     for ($j = 0; $j < $productsPerSection; $j++) {
                         $index = $i * $productsPerSection + $j;
