@@ -12,19 +12,21 @@ include 'db/db_connection.php';
     <title>Productos</title>
 </head>
 <body>
-    <header>
-        <h1>KakaoTrendy</h1>
-        <nav>
-            <ul>
-                <li><a href="index.php">Inicio</a></li>
-                <li><a href="products.php">Productos</a></li>
-                <li><a href="cart.php">Carrito</a></li>
-                <li><a href="checkout.php">Checkout</a></li>
-                <li><a href="#about">Sobre Nosotros</a></li>
-                <li><a href="#contact">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+<header>
+    <div class="logo-container">
+        <img src="logo.jpeg" alt="logo">
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.php">Inicio</a></li>
+            <li><a href="products.php">Productos</a></li>
+            <li><a href="cart.php">Carrito</a></li>
+            
+            <li><a href="nosotros.php">Nosotros</a></li>
+            
+        </ul>
+    </nav>
+</header>
     <main>
         <section id="products">
             <h2>Productos Disponibles</h2>
