@@ -32,15 +32,16 @@ CREATE TABLE orders (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE order_items (
-    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE `order_items` (
+    id INT(11) NOT NULL AUTO_INCREMENT,
     order_id INT(11) NOT NULL,
     product_id INT(11) NOT NULL,
     quantity INT(11) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
-    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
-);
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`order_id`) REFERENCES `orders`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`product_id`) REFERENCES `products`(`product_id`) ON DELETE CASCADE
+) 
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
