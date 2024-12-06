@@ -261,25 +261,100 @@ footer {
 }
 
 .contacto {
-    display: flex; /* Usar flexbox para alinear los iconos */
-    justify-content: center; /* Centrar los iconos horizontalmente */
-    align-items: center; /* Centrar los iconos verticalmente */
-    gap: 20px; /* Espacio entre los iconos */
-    padding: 20px; /* Espaciado interno */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 20px; 
+    padding: 20px; 
 }
 
 .social-link {
-    display: inline-block; /* Permitir que el enlace se comporte como un bloque */
-    transition: transform 0.3s; /* Transición suave para el efecto hover */
+    display: inline-block; 
+    transition: transform 0.3s; 
 }
 
 .social-icon {
-    width: 40px; /* Ancho del icono */
-    height: 40px; /* Alto del icono */
+    width: 40px; 
+    height: 40px; 
 }
 
 .social-link:hover {
-    transform: scale(1.1); /* Aumentar el tamaño del icono al pasar el mouse */
+    transform: scale(1.1);
+}
+.sidebar {
+    width: 200px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-right: 1px solid #dddddd;
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.sidebar h3 {
+    margin-top: 0;
+    color: #653d79;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 10px;
+    display: block;
+    border-radius: 5px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #653d79;
+    color: #ffffff;
+}
+
+.main-content {
+    margin-left: 220px;
+    padding: 20px;
+}
+
+.ubicacion {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    margin-top: 20px;
+    margin-left: 40px;
+}
+
+.ubicacion a img {
+    width: 790px; 
+    height: 600px; 
+    border-radius: 10px; 
+    transition: transform 0.3s; 
+}
+
+.ubicacion a img:hover {
+    transform: scale(1.1); 
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+        border-right: none;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
 }
 
 @media (max-width: 768px) {

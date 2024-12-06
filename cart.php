@@ -39,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css">
     <title>Carrito de Compras - KakaoTrendy</title>
 </head>
 <body>
@@ -50,8 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <ul>
             <li><a href="index.php">Inicio</a></li>
             <li><a href="products.php">Productos</a></li>
-            <li><a href="cart.php">Carrito</a></li>
-            
+            <li><a href="cart.php" title="Carrito"><i class="fas fa-shopping-cart" style="color: #f5ebfa;"></i></a></li>
             <li><a href="nosotros.php">Nosotros</a></li>
             
         </ul>

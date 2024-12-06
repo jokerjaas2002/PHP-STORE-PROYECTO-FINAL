@@ -2,12 +2,10 @@
 session_start(); 
 include 'db/db_connection.php'; 
 
-
 if (empty($_SESSION['cart'])) {
     header('Location: cart.php');
     exit;
 }
-
 
 $total = 0;
 foreach ($_SESSION['cart'] as $item) {
@@ -35,22 +33,29 @@ foreach ($_SESSION['cart'] as $item) {
         </ul>
     </nav>
 </header>
-    <main>
-        <section id="checkout">
-            <h2>Checkout</h2>
-            <form action="process_order.php" method="post">
-                <label for="name">Nombre:</label>
-                <input type="text" id="name" name="name"><br><br>
-                <label for="email">Correo Electrónico:</label>
-                <input type="email" id="email" name="email"><br><br>
-                <label for="address">Dirección:</label>
-                <input type="text" id="address" name="address"><br><br>
-                <input type="submit" value="Realizar Pedido">
-            </form>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 KakaoTrendy. Todos los derechos reservados.</p>
-    </footer>
+<main>
+    <section id="checkout">
+        <h2>Checkout</h2>
+        <form action="process_order.php" method="post" onsubmit="return validateForm()">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="phone">Número de Teléfono:</label>
+            <input type="tel" id="phone" name="phone" required><br><br>
+            <label for="address">Dirección:</label>
+            <input type="text" id="address" name="address" required><br><br>
+            <input type="submit" value="Realizar Pedido">
+        </form>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 KakaoTrendy. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+function validateForm() {
+    
+    return true; 
+}
+</script>
 </body>
 </html>
