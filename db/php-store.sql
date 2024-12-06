@@ -24,24 +24,22 @@ CREATE TABLE products (
 );
 
 CREATE TABLE orders (
-  id INT AUTO_INCREMENT,
-  customer_id INT,
-  order_date DATE,
-  total DECIMAL(10, 2),
-  status VARCHAR(20),
-  shipping_address VARCHAR(100),
-  PRIMARY KEY (id),
-  FOREIGN KEY (customer_id) REFERENCES customers(id)
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(255) NOT NULL,
+    customer_phone VARCHAR(20) NOT NULL,
+    customer_address TEXT NOT NULL,
+    total_amount DECIMAL(10, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE order_items (
-  id INT AUTO_INCREMENT,
-  order_id INT,
-  product_id INT,
-  quantity INT,
-  PRIMARY KEY (id),
-  FOREIGN KEY (order_id) REFERENCES orders(id),
-  FOREIGN KEY (product_id) REFERENCES products(id)
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    order_id INT(11) NOT NULL,
+    product_id INT(11) NOT NULL,
+    quantity INT(11) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
 );
 
 CREATE TABLE users (
