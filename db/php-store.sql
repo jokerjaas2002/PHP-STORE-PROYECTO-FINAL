@@ -9,15 +9,7 @@ CREATE TABLE categories (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE customers (
-  id INT AUTO_INCREMENT,
-  name VARCHAR(50),
-  email VARCHAR(100),
-  password VARCHAR(255),
-  address VARCHAR(100),
-  phone VARCHAR(20),
-  PRIMARY KEY (id)
-);
+
 
 CREATE TABLE products (
   id INT AUTO_INCREMENT,
@@ -52,35 +44,10 @@ CREATE TABLE order_items (
   FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
-CREATE TABLE payments (
-  id INT AUTO_INCREMENT,
-  order_id INT,
-  payment_date DATE,
-  amount DECIMAL(10, 2),
-  payment_method VARCHAR(20),
-  PRIMARY KEY (id),
-  FOREIGN KEY (order_id) REFERENCES orders(id)
-);
-
-CREATE TABLE reviews (
-  id INT AUTO_INCREMENT,
-  product_id INT,
-  customer_id INT,
-  rating INT CHECK (rating >= 1 AND rating <= 5),
-  comment TEXT,
-  review_date DATE,
-  PRIMARY KEY (id),
-  FOREIGN KEY (product_id) REFERENCES products(id),
-  FOREIGN KEY (customer_id) REFERENCES customers(id)
-);
-
-CREATE TABLE shipping (
-  id INT AUTO_INCREMENT,
-  order_id INT,
-  shipping_date DATE,
-  delivery_date DATE,
-  shipping_method VARCHAR(50),
-  tracking_number VARCHAR(100),
-  PRIMARY KEY (id),
-  FOREIGN KEY (order_id) REFERENCES orders(id)
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
