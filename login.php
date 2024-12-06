@@ -2,11 +2,6 @@
 session_start();
 include 'db/db_connection.php';
 
-if (isset($_SESSION['user_id'])) {
-    header('Location: index.php');
-    exit;
-}
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -25,10 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header('Location: index.php');
             exit;
         } else {
-            $_SESSION['error'] = "Contraseña incorrecta.";
+            echo "Contraseña incorrecta.";
         }
     } else {
-        $_SESSION['error'] = "Usuario no encontrado.";
+        echo "Usuario no encontrado.";
     }
 
     $stmt->close();
@@ -71,16 +66,6 @@ $conn->close();
 <body>
     <div class="container mt-5">
         <h1 class="text-center">Iniciar Sesión</h1>
-
-        <?php if (isset($_SESSION['error'])): ?>
-            <div class="alert alert-danger" role="alert">
-                <?php
-                echo $_SESSION['error'];
-                unset($_SESSION['error']);
-                ?>
-            </div>
-        <?php endif; ?>
-
         <form action="login.php" method="POST">
             <div class="form-group">
                 <label for="username">Nombre de Usuario</label>
